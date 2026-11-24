@@ -16,3 +16,10 @@ node_modules/
 __pycache__/
 .venv/
 venv/
+
+# build output
+build/
+build-*/
+*.o
+*.a
+compile_commands.json

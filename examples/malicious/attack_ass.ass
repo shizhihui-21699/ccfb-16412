@@ -1,0 +1,21 @@
+[Script Info]
+Title: Malicious sample - oversized style run and dangerous overrides
+ScriptType: v4.00+
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize
+; A single style field blown up to megabytes: historically a heap overflow
+; via unchecked fixed-width buffers in the style parser.
+Style: Default,AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,20
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+; Absurd coordinates in \move and an animated transform \t: default policy
+; strips both so the renderer never allocates per-frame interpolation state.
+Dialogue: 0,0:00:01.00,0:00:02.00,Default,,0,0,0,,{\move(99999999,-88888888,1,2)\t(0,5000,\fscx99999)}pwned?
+; A font size scalar far beyond any real screen: clamped, not trusted.
+Dialogue: 0,0:00:03.00,0:00:04.00,Default,,0,0,0,,{\fs2147483647}huge
+; Malformed timeline: end before start and an out-of-range hour.
+Dialogue: 0,0:00:09.00,0:00:01.00,Default,,0,0,0,,reversed timestamps are repaired
+; Unbalanced override brace: must not confuse the sanitizer.
+Dialogue: 0,0:00:10.00,0:00:11.00,Default,,0,0,0,,{\b1 unterminated run of text

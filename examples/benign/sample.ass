@@ -1,0 +1,16 @@
+[Script Info]
+Title: Benign effects sample
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, BackColour, Bold, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,48,&H00FFFFFF,&H00000000,0,1,2,1,2,40,40,60,1
+Style: Title,Georgia,72,&H0000FFFF,&H00000000,1,1,3,2,8,40,40,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:01.00,0:00:04.00,Title,,0,0,0,,{\an8\k15}Chapter One
+Dialogue: 0,0:00:05.00,0:00:08.50,Default,,0,0,0,,{\b1}Harmless{\r} inline styling and a line\Nbreak here.
+Comment: 0,0:00:00.00,0:00:01.00,Default,,0,0,0,,This comment is parsed but never displayed.
